@@ -1,33 +1,16 @@
-/* import React from 'react'
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 
-function RegistrationPage() {
-    return (
-      <div>
-        <h1>This is the Registration page</h1>
-        <Link to="/">
-          <button type="button">Back</button>
-        </Link>
-      </div>
-    );
-}
-
-export default RegistrationPage */
-
-import React, { useRef/* , useState */ } from "react";
-import { Form, Button, Card/* , Alert  */} from "react-bootstrap";
-//import { Link } from "react-router-dom";
- import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom"; 
-
-export default function RegistrationPage() {
+export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-    const { signup } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory(); 
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -46,15 +29,15 @@ export default function RegistrationPage() {
     }
 
     setLoading(false);
-  } 
+  }
 
   return (
     <>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
-           {error && <Alert variant="danger">{error}</Alert>} 
-          <Form  onSubmit={handleSubmit} >
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
@@ -67,7 +50,7 @@ export default function RegistrationPage() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
-            <Button  disabled={loading}  className="w-100" type="submit">
+            <Button disabled={loading} className="w-100" type="submit">
               Sign Up
             </Button>
           </Form>
