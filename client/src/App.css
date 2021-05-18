@@ -1,0 +1,26 @@
+.app-header {
+    background-color: #C4C4C4;
+    display: flex;
+    justify-content:space-between;
+}
+
+.header-logo {
+    margin: auto;
+    margin-left: 1rem;
+}
+
+.header-links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-links > div {
+    margin: 1rem;
+}
+
+#registration-form, #login-form {
+    margin: auto;
+    margin-top: 3rem;
+    width: 90%;
+    max-width: 600px;
+}
