@@ -1,11 +1,20 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Card,
+  Alert,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+//import Dropdown from "react-bootstrap/Dropdown";
 
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const TypeOfUserRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
@@ -23,15 +32,19 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      history.push("/SignupConfirmation");
     } catch {
       setError("Failed to create an account");
     }
 
     setLoading(false);
   }
-
-  return (
+  const handleSelect = (e) => {
+    console.log(e);
+  };
+/*   console.log(TypeOfUserRef.current.value);
+ */ 
+ return (
     <>
       <Card>
         <Card.Body>
@@ -50,6 +63,17 @@ export default function Signup() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
+            <DropdownButton
+              alignRight
+              title="Register as"
+              id="dropdown-menu-align-right"
+              onSelect={handleSelect}
+              ref={TypeOfUserRef}
+            >
+              <Dropdown.Item eventKey="Volunteer">Volunteer</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="Trainee">Trainee</Dropdown.Item>
+            </DropdownButton>
             <Button disabled={loading} className="w-100" type="submit">
               Sign Up
             </Button>

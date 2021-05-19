@@ -5,9 +5,12 @@ import { AuthProvider } from "../contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./Dashboard"
 import Login from "./Login"
+import SignupConfirmation from "./SignupConfirmation";
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
+import VolunteerPage from "./VolunteerPage";
+
 
 function App() {
   return (
@@ -22,14 +25,19 @@ function App() {
               <PrivateRoute exact path="/" component={Dashboard} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
+              <Route
+                path="/signupConfirmation"
+                component={SignupConfirmation}
+              />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
+              <Route path="/VolunteerPage" component={VolunteerPage} />
             </Switch>
           </AuthProvider>
         </Router>
       </div>
     </Container>
-  )
+  );
 }
 
 export default App;
